@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main-div" class="container">
+<h2 class="text-warning">Customer Support <span class="text-secondary">(ARCHIVED)</span></h2>
+{% for customer in customer_supports %}
+    <div class="card bg-light">
+        <div class="card-body text-center">
+            <h3 class="card-text"><a href="{% url 'support:view_detail' customer_id=customer.id %}">{{customer.subject}}</a></h3>
+            <p class="card-text">{{customer.issue_description}}</p>
+            <p class="text-right text-secondary">{{customer.sent}}</p>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock content %}

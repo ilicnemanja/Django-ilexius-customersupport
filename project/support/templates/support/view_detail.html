@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main-div" class="container">
+    <div class="card bg-light">
+        <div class="card-body text-center">
+            <h3 class="text-left"><span style="color: #0e5069; font-weight: 600;">Name:</span> {{customersupports.name}}</h3>
+            <h3 class="text-left"><span style="color: #0e5069; font-weight: 600;">Phone:</span> {{customersupports.phone}}</h3>
+            <h3 class="text-left"><span style="color: #0e5069; font-weight: 600;">Company:</span> {{customersupports.company}}</h3>
+            <h3 class="text-left"><span style="color: #0e5069; font-weight: 600;">Email:</span> {{customersupports.customer_email}}</h3>
+            <h3 class="text-left"><span style="color: #0e5069; font-weight: 600;">Subject:</span> {{customersupports.subject}}</h3>
+            <h3 class="text-left"><span style="color: #0e5069; font-weight: 600;">Issue:</span> {{customersupports.issue_description}}</h3>
+            <h3 class="text-left"><span style="color: #0e5069; font-weight: 600;">Date and Time for callback:</span> {{customersupports.date_time}}</h3>
+            {% if customersupports.is_archived == False %}
+            <h4 class="text-right"><a class="text-success" href="{% url 'support:add_to_archive' customer_id=customersupports.id %}">Send to archive</a></h4>
+            {% else %}
+            <h4 class="text-right"><a class="text-success" href="{% url 'support:restore' customer_id=customersupports.id %}">Restore</a></h4>
+            {% endif %}
+            <h4 onclick="delete_confirmation(event)" class="text-right"><a class="text-danger" href="{% url 'support:delete' customer_id=customersupports.id %}">Delete</a></h4>
+            <br>
+            <h2 class="text-left" id="comments">Comments:</h3>
+            {% for comment in comments %}
+                {% if comment.customer_support_id == customersupports.id %}
+                <h4 class="text-left text-secondary">{{comment.user.first_name}} {{comment.user.last_name}}</h4>
+                <p class="text-left">{{comment.text}}</p>
+                <p class="text-right text-secondary">{{comment.added}}</p>
+                {% endif %}
+            {% endfor %}
+            {% if customersupports.is_archived == False %}
+            <br><br>
+            <div id="form-div">
+                <form action="{% url 'support:add_comment' customer_id=customersupports.id %}" method="POST">
+                {% csrf_token %}
+                    <div class="row">
+                        <input class="form-control" type="text" name="comment" id="comment" placeholder="Add comment...">
+                        <button class="form-control" type="submit" class="btn" style="color: white; background: blue;">Send comment</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

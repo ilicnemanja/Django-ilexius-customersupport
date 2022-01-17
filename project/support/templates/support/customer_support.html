@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main-div" class="container">
+    <h3 class="text-center">Customer service support</h3>
+    <br><br>
+    <h4 class="text-center">Fill out the form below: </h4>
+
+    <div id="form-div">
+        
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <label for="name">Name <span style="color: #a1a1a1;">(required)</span></label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="row">
+                <label for="phone">Phone number <span style="color: #a1a1a1;">(NOT required)</span></label>
+            </div>
+            
+            <div class="row">
+                <input type="tel" id="phone" name="phone" class="form-control">
+            </div>
+
+            <div class="row">
+                <label for="company">Company <span style="color: #a1a1a1;">(NOT required)</span></label>
+                <input type="text" id="company" name="company" class="form-control">
+            </div>
+
+            <div class="row">
+                <label for="email">Email <span style="color: #a1a1a1;">(required)</span></label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="row">
+                <label for="subject">Subject <span style="color: #a1a1a1;">(required)</span></label>
+                <input type="text" id="subject" name="subject" class="form-control" required>
+            </div>
+
+            <div class="row">
+                <label for="description">Problem description <span style="color: #a1a1a1;">(required)</span></label>
+                <textarea id="description" name="description" class="form-control" rows="5" required></textarea>
+            </div>
+
+            <div class="row">
+                <label for="datetime">Select date and time for callback <span style="color: #a1a1a1;">(NOT required)</span></label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' name="datetime" class="form-control"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+           
+            </div>
+
+            <div class="row">
+                <button id="submit-btn" class="btn" type="submit">Send</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+{% endblock content %}

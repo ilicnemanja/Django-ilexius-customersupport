@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Customer Service Support | ilexius</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'support/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="{% static 'support/css/style.css' %}">
+
+    <!-- Libraries for phone input -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+    <!-- Google Icon Font -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Libraries for datetime picker  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js?ver=1"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js?ver=1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/5a991bff/src/js/bootstrap-datetimepicker.js"></script>
+
+</head>
+<body>
+    <header>
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="https://www.ilexius.de/" target="_blank"><img src="{% static 'support/img/logo.png' %}" alt="logo" style="width: 65px"></a>
+            </li>
+            {% if request.session.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'support:check_support' %}">Check Support</a>
+            </li>
+            <li class="nav-item">
+                <a onclick="logout_confirmation(event)" class="nav-link" href="{% url 'support:logout' %}">Log out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'support:customer_support' %}">Support</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'support:login' %}">Sign in</a>
+            </li>
+            {% endif %}
+        </ul>
+    </header>
+    <main>
+        {% if error %}
+        <div class="alert alert-secondary alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-danger">{{ error }}</strong>
+        </div>
+        {% endif %}
+
+        {% if success %}
+        <div class="alert alert-secondary alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-success">{{ success }}</strong>
+        </div>
+        {% endif %}
+
+        {% block content %}{% endblock content %}
+
+    </main>
+
+
+    <!-- My JS -->
+    <script src="{% static 'support/js/index.js' %}"></script>
+</body>
+</html>

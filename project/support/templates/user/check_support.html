@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main-div" class="container">
+    <h3 class="text-center">Welcome to the page where we check customers support</h3>
+    <br><br>
+    <div class="text-center">
+        <h4><span class="left"><a href="{% url 'support:view_list' %}">View List</a></span><span class="right"><a href="{% url 'support:view_archived_list' %}">View Archive</a></span></h4>
+    </div>
+</div>
+{% endblock content %}
